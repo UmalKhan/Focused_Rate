@@ -59,7 +59,7 @@ Process Images: The script will automatically process the captured images and pe
 Save Results: The camera_matrix and dist_coeffs will be saved to camera_calibration.npz. You will need these for the real-time detection script.
 
 ## Step 2: Run Real-time Gaze Detection and Data Collection
-Define Target Point: In your check.py (the script that logs data), you'll need to define the TARGET_POINT_3D coordinates. This is the 3D (X, Y, Z) location of the point you want to monitor focus on, relative to your camera's lens.
+Define Target Point: In your calibrate_check.py (the script that logs data), you'll need to define the TARGET_POINT_3D coordinates. This is the 3D (X, Y, Z) location of the point you want to monitor focus on, relative to your camera's lens.
 Example: TARGET_POINT_3D = np.array([[-500.0, 0.0, 5000.0]]) (5 meters in front, 0.5 meters to the left, at camera height, all in mm).
 Update Calibration in Main Script: Load the camera_matrix and dist_coeffs from camera_calibration.npz into your main_gaze_detector.py script.
 Run the main detection script:
