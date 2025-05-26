@@ -1,6 +1,10 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import csv
+
+total_time = 1
+people_focused = 0
 
 mp_face_mesh = mp.solutions.face_mesh
 face_mesh = mp_face_mesh.FaceMesh(
@@ -110,6 +114,7 @@ while True:
 
                     if angle_deg < GAZE_ANGLE_THRESHOLD_DEG:
                         current_face_status = f"Looking at Target ({angle_deg:.1f}°)"
+                        people_focused += 1
                     else:
                         if angle_deg < 30:
                              current_face_status = f"Looking Near Target ({angle_deg:.1f}°)"
@@ -151,6 +156,14 @@ while True:
 
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
+    
+    total_time += 1
+
+csv_headers = ['class', 'lecturer', 'course', 'total_time', 'focused_time']
+csv_file = open('students.csv', mode='a', newline='')
+csv_writer = csv.writer(csv_file)
+csv_writer.writerow(csv_headers)
+csv_writer.writerow(['AB-1A', 'Mr.ABC', 'ABC123', total_time, people_focused])
 
 cap.release()
 cv2.destroyAllWindows()
