@@ -18,9 +18,9 @@ face_mesh = mp_face_mesh.FaceMesh(
 mp_drawing = mp.solutions.drawing_utils
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
 
-# cap = cv2.VideoCapture(0)
-video_path = 'C:\\Users\\hp\\Desktop\\T_T\\class\\12th Grade ELA.mp4'
-cap = cv2.VideoCapture(video_path)
+cap = cv2.VideoCapture(0)
+# video_path = 'path_to_video.mp4'
+# cap = cv2.VideoCapture(video_path)
 
 if not cap.isOpened():
     print("Error: Could not open webcam.")
@@ -105,6 +105,7 @@ csv_headers = ['class', 'lecturer', 'course', 'total_time', 'focused_time']
 csv_file = open('students.csv', mode='a', newline='')
 csv_writer = csv.writer(csv_file)
 csv_writer.writerow(csv_headers)
+# replace with appropriate class / lecturer / course
 csv_writer.writerow(['AB-1A', 'Mr.ABC', 'ABC123', total_time, people_focused])
 
 cap.release()
