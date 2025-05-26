@@ -21,6 +21,14 @@ Gaze Direction Calculation: Infers the gaze vector from the head's orientation a
 Data Logging: Records the engagement status and gaze angle for each detected face per frame into a CSV file.
 Offline Analysis: A separate script reads the collected data, calculates average focus rates, and generates visualizations to provide insights into engagement patterns.
 
+## How It Works
+Camera Calibration: A one-time process to understand the camera's intrinsic properties, crucial for accurate 3D pose estimation when precise spatial understanding is required. If calibration is skipped, a default camera matrix and distortion coefficients are used, which still allows for relative gaze tracking but may not be accurate for exact 3D positioning.
+Real-time Detection: Uses MediaPipe's Face Mesh to detect 3D facial landmarks from a live video feed.
+3D Head Pose Estimation: Employs OpenCV's Perspective-n-Point (PnP) algorithm to derive the head's 3D rotation and translation relative to the camera.
+Gaze Direction Calculation: Infers the gaze vector from the head's orientation and compares it to a predefined 3D target point.
+Data Logging: Records the engagement status and gaze angle for each detected face per frame into a CSV file.
+Offline Analysis: A separate script reads the collected data, calculates average focus rates, and generates visualizations to provide insights into engagement patterns.
+
 ## Technologies Used
 Python: The primary programming language.
 MediaPipe: For robust and efficient real-time facial landmark detection.
@@ -41,9 +49,9 @@ A printed chessboard pattern (for camera calibration)
 Install the required libraries:
 pip install opencv-python mediapipe numpy pandas matplotlib seaborn
 
-## Step 1: Camera Calibration
+## Step 1: Camera Calibration (if using with calibration)
 This is a crucial one-time step for accurate 3D gaze estimation.
-Prepare Chessboard: Print a chessboard pattern (e.g., 9x6 inner corners) on matte paper. Measure the exact size of one square (e.g., 20mm). Update the CHECKERBOARD and SQUARE_SIZE variables in calibrate_camera.py accordingly.
+Prepare Chessboard: Print a chessboard pattern (e.g., 9x6 inner corners) on matte paper. Measure the exact size of one square (e.g., 20mm). Update the 'chessboard' and 'sqr_size' variables in calibrate_camera.py accordingly.
 Run the calibration script:
 python calibrating.py
 Capture Images: Choose 'c' to capture new images. Hold the chessboard steady in various positions, angles, and distances within the webcam's view. Press 's' to save images and 'q' to quit. Aim for at least 10-20 successfully detected images.
@@ -55,7 +63,12 @@ Define Target Point: In your check.py (the script that logs data), you'll need t
 Example: TARGET_POINT_3D = np.array([[-500.0, 0.0, 5000.0]]) (5 meters in front, 0.5 meters to the left, at camera height, all in mm).
 Update Calibration in Main Script: Load the camera_matrix and dist_coeffs from camera_calibration.npz into your main_gaze_detector.py script.
 Run the main detection script:
-python main_gaze_detector.py
+python calibrate_check.py
+Collect Data: The script will open your webcam feed. As it detects faces and estimates gaze, it will log data to focus_data.csv. Press 'q' to stop the detection and close the CSV file.
+
+## (if using without calibration)
+Run the detection script:
+python check.py
 Collect Data: The script will open your webcam feed. As it detects faces and estimates gaze, it will log data to focus_data.csv. Press 'q' to stop the detection and close the CSV file.
 
 ## Step 3: Analyze and Visualize Data
