@@ -1,6 +1,6 @@
 # Focused_Rate
 
-![Engagement Analysis Demo](/0526 (3).gif)
+![Engagement Analysis Demo](0526 (3).gif)
 
 ## Overview
 This project develops a real-time computer vision and data analytics system to measure and visualize audience engagement by determining if individuals are focused on a specific point (e.g., a screen, presentation, or speaker). It leverages advanced head pose estimation to infer gaze direction and then aggregates this data to provide valuable insights into attention levels across different courses, lecturers, and classes.
