@@ -55,9 +55,9 @@ mediapipe_to_model_idx = {
 
 # measure these coordinates relative to your camera's origin (which is usually the center of its lens).
 TARGET_POINT_3D = np.array([[-500.0, 0.0, 5000.0]])
-# cap = cv2.VideoCapture(0)
-video_path = 'C:\\Users\\hp\\Desktop\\T_T\\class\\12th Grade ELA.mp4'
-cap = cv2.VideoCapture(video_path)
+cap = cv2.VideoCapture(0)
+# video_path = 'path_to_video.mp4'
+# cap = cv2.VideoCapture(video_path)
 
 if not cap.isOpened():
     print("Error: Could not open video source.")
